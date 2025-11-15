@@ -50,7 +50,7 @@ chrome.runtime.onInstalled.addListener(() => {
         const data = await response.json();
         const summary = data.choices?.[0]?.message?.content?.trim() || 'No summary returned.';
 
-        // ✅ Send summary to page
+        // Send summary to page
         chrome.tabs.sendMessage(tab.id, {
           action: "showSummary",
           summary: summary
