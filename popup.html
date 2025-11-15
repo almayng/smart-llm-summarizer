@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 450px; padding: 12px; font-family: -apple-system, sans-serif;
+      font-size: 14px;
+    }
+    h3 { margin: 0 0 12px; }
+    button {
+      width: 100%; padding: 8px; margin: 6px 0; border: none; border-radius: 5px;
+      background: #4A6CF7; color: white; cursor: pointer;
+    }
+    button.secondary {
+      background: #6c757d; font-size: 13px;
+    }
+    #summary { 
+      margin: 12px 0; padding: 12px; background: #f8f9fa; border-radius: 6px;
+      white-space: pre-wrap; min-height: 60px; max-height: 200px; overflow: auto;
+    }
+    #history { margin-top: 16px; }
+    .history-item {
+      padding: 8px; margin: 6px 0; background: #eef2ff; border-radius: 5px; position: relative;
+    }
+    .history-item button {
+      width: auto; padding: 4px 8px; margin: 0; font-size: 12px; float: right;
+    }
+    .history-label {
+      font-weight: bold; margin-bottom: 4px;
+    }
+    .settings-link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #4A6CF7;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h3>Smart LLM Summarizer</h3>
+
+  <button id="summarizePage">Summarize Full Page</button>
+
+  <div id="summary"></div>
+  <button id="copySummary" class="secondary" disabled>Copy Summary</button>
+
+  <div id="history">
+    <h4>History (last 5)</h4>
+    <div id="historyList"></div>
+    <button id="clearHistory" class="secondary">Clear History</button>
+  </div>
+
+  <a href="#" id="openOptions" class="settings-link">⚙️ Настройки сервера</a>
+
+  <script src="popup.js"></script>
+</body>
+</html>
