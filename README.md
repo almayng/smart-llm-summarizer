@@ -31,5 +31,5 @@ A browser extension that summarizes selected text or an entire page using **any 
 - API keys are stored only on your device
 - No external connections without your knowledge
 
-## 📄 Лицензия
+## 📄 License
 MIT License

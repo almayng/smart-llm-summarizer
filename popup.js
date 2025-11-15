@@ -1,7 +1,7 @@
 // popup.js
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Элементы интерфейса
+    // Interface elements
     const summarizePageBtn = document.getElementById('summarizePage');
     const copySummaryBtn = document.getElementById('copySummary');
     const summaryDiv = document.getElementById('summary');
@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const clearHistoryBtn = document.getElementById('clearHistory');
     const openOptionsLink = document.getElementById('openOptions');
   
-    // Открытие страницы настроек
+    // Open settings page
     openOptionsLink.addEventListener('click', (e) => {
       e.preventDefault();
       chrome.runtime.openOptionsPage();
     });
   
-    // Загрузка истории
+    // Load history
     async function loadHistory() {
       const data = await chrome.storage.local.get(['summaryHistory']);
       const history = data.summaryHistory || [];
@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
       });
     }
-  
-    // === Суммаризация всей страницы ===
+
+    // Summarize entire page
     async function summarizePage() {
       try {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         summaryDiv.textContent = summary;
         copySummaryBtn.disabled = false;
   
-        // Сохраняем в историю
+        // Save to history
         const historyData = await chrome.storage.local.get(['summaryHistory']);
         let history = historyData.summaryHistory || [];
         history.push({ text: summary, timestamp: Date.now() });
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   
     summarizePageBtn.addEventListener('click', summarizePage);
   
-    // === Копирование сводки ===
+    // Copy summary
     copySummaryBtn.addEventListener('click', async () => {
       await navigator.clipboard.writeText(summaryDiv.textContent);
       copySummaryBtn.textContent = 'Copied!';
@@ -119,12 +119,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       }, 1000);
     });
   
-    // === Очистка истории ===
+    // Clear history
     clearHistoryBtn.addEventListener('click', async () => {
       await chrome.storage.local.set({ summaryHistory: [] });
       loadHistory();
     });
   
-    // Инициализация
+    // Initialization
     loadHistory();
   });

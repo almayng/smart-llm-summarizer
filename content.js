@@ -1,6 +1,6 @@
 // content.js
 
-// Обработка сообщений из background
+// Handle messages from background
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "getPageText") {
     sendResponse({ text: document.body.innerText || "" });
@@ -10,13 +10,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-// Функция создания плавающего окна
+// Function to create floating window
 function showSummaryPopup(summaryText) {
-  // Удаляем предыдущее окно, если есть
+  // Remove previous window if exists
   const existing = document.getElementById('llm-summary-popup');
   if (existing) existing.remove();
 
-  // Создаём контейнер
+  // Create container
   const popup = document.createElement('div');
   popup.id = 'llm-summary-popup';
   popup.style.cssText = `
@@ -38,7 +38,7 @@ function showSummaryPopup(summaryText) {
     cursor: default;
   `;
 
-  // Заголовок (теперь draggable)
+  // Header (now draggable)
   const header = document.createElement('div');
   header.id = 'llm-summary-header';
   header.style.cssText = `
@@ -59,7 +59,7 @@ function showSummaryPopup(summaryText) {
     ">&times;</button>
   `;
 
-  // Тело с текстом
+  // Body with text
   const body = document.createElement('div');
   body.style.cssText = `
     padding: 16px;
@@ -74,26 +74,26 @@ function showSummaryPopup(summaryText) {
   popup.appendChild(body);
   document.body.appendChild(popup);
 
-  // === Логика перетаскивания ===
+  // Dragging logic
   let isDragging = false;
   let offsetX, offsetY;
 
   header.addEventListener('mousedown', (e) => {
     isDragging = true;
-    // Сохраняем смещение курсора относительно окна
+    // Save cursor offset relative to window
     const rect = popup.getBoundingClientRect();
     offsetX = e.clientX - rect.left;
     offsetY = e.clientY - rect.top;
-    e.preventDefault(); // предотвращаем выделение текста
+    e.preventDefault(); // prevent text selection
   });
 
   document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
-    // Вычисляем новую позицию (без transform!)
+    // Calculate new position (without transform!)
     const x = e.clientX - offsetX;
     const y = e.clientY - offsetY;
 
-    // Отключаем transform, используем top/left
+    // Disable transform, use top/left
     popup.style.transform = 'none';
     popup.style.left = x + 'px';
     popup.style.top = y + 'px';
@@ -103,10 +103,10 @@ function showSummaryPopup(summaryText) {
     isDragging = false;
   });
 
-  // === Закрытие окна ===
+  // Window closing
   document.getElementById('llm-close-btn').onclick = () => popup.remove();
 
-  // Закрытие по клику вне окна (но не при перетаскивании)
+  // Close on click outside window (but not while dragging)
   document.addEventListener('click', function closeOnClick(e) {
     if (!popup.contains(e.target) && !isDragging) {
       popup.remove();

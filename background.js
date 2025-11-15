@@ -17,7 +17,7 @@ chrome.runtime.onInstalled.addListener(() => {
         const model = settings.model?.trim() || 'llama3.2';
   
         if (!baseUrl) {
-          // Отправляем ошибку на страницу
+          // Send error to page
           chrome.tabs.sendMessage(tab.id, {
             action: "showSummary",
             summary: "❌ Error: Base URL not set.\nGo to extension Settings."
@@ -49,14 +49,14 @@ chrome.runtime.onInstalled.addListener(() => {
   
         const data = await response.json();
         const summary = data.choices?.[0]?.message?.content?.trim() || 'No summary returned.';
-  
-        // ✅ Отправляем сводку на страницу
+
+        // ✅ Send summary to page
         chrome.tabs.sendMessage(tab.id, {
           action: "showSummary",
           summary: summary
         });
-  
-        // Сохраняем в историю
+
+        // Save to history
         const historyData = await chrome.storage.local.get(['summaryHistory']);
         let history = historyData.summaryHistory || [];
         history.push({ text: summary, timestamp: Date.now() });

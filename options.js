@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const saveBtn = document.getElementById('save');
     const statusDiv = document.getElementById('status');
   
-    // Загрузка текущих настроек
+    // Load current settings
     const saved = await chrome.storage.sync.get(['baseUrl', 'apiKey', 'model']);
     baseUrl.value = saved.baseUrl || 'http://localhost:1234/v1';
     apiKey.value = saved.apiKey || '';
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         model: model.value.trim()
       });
   
-      statusDiv.textContent = '✅ Настройки сохранены!';
+      statusDiv.textContent = '✅ Settings saved!';
       statusDiv.className = 'status success';
       setTimeout(() => statusDiv.textContent = '', 2000);
     });
