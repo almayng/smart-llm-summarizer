@@ -5,8 +5,8 @@
   "description": "Summarize page or selection using OpenAI-compatible LLM",
 
   "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png"
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
   },
 
   "permissions": ["activeTab", "storage", "contextMenus"],
