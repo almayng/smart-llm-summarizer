@@ -7,16 +7,13 @@ A browser extension that summarizes selected text or an entire page using **any 
 - Floating, draggable summary window
 - Support for local and cloud LLM servers
 - Complete privacy: your data never leaves your computer
-- Responses are always in Russian
 
 ## 🖥️ Supported Browsers
 - Vivaldi (recommended)
 - Google Chrome
-- Microsoft Edge
-- Brave
 
 ## 🚀 Installation
-1. Download the [latest release](https://github.com/your-username/smart-llm-summarizer/releases)
+1. Download the [latest release](https://github.com/almayng/smart-llm-summarizer)
 2. Extract the archive
 3. In your browser, go to `vivaldi://extensions` (or `chrome://extensions`)
 4. Enable **Developer mode**
