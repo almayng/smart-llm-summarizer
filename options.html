@@ -44,6 +44,14 @@
   <label for="model">Model:</label>
   <input type="text" id="model" placeholder="llama3.2" value="llama3.2">
 
+  <h2>Role Prompts</h2>
+
+  <label for="systemRole">System Role Content:</label>
+  <textarea id="systemRole" rows="3" placeholder="You are a summarizer assistant that briefly summarizes text. Response language must be Russian." style="width: 100%; padding: 8px; margin: 6px 0; box-sizing: border-box; font-family: inherit;"></textarea>
+
+  <label for="userRole">User Role Content (text of the page will be appended after this):</label>
+  <textarea id="userRole" rows="3" placeholder="Briefly summarize the following text in 3-5 sentences" style="width: 100%; padding: 8px; margin: 6px 0; box-sizing: border-box; font-family: inherit;"></textarea>
+
   <button id="save">Save Settings</button>
   <div id="status"></div>
 

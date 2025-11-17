@@ -11,10 +11,15 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     if (info.menuItemId === "summarize-selection" && info.selectionText) {
       try {
-        const settings = await chrome.storage.sync.get(['baseUrl', 'apiKey', 'model']);
+        const defaultSystemRole = "You are a summarizer assistant that briefly summarizes text. Response language must be Russian.";
+        const defaultUserRole = "Briefly summarize the following text in 3-5 sentences";
+        
+        const settings = await chrome.storage.sync.get(['baseUrl', 'apiKey', 'model', 'systemRoleContent', 'userRoleContent']);
         const baseUrl = settings.baseUrl?.trim();
         const apiKey = settings.apiKey?.trim() || '';
         const model = settings.model?.trim() || 'llama3.2';
+        const systemRoleContent = settings.systemRoleContent?.trim() || defaultSystemRole;
+        const userRoleContent = settings.userRoleContent?.trim() || defaultUserRole;
   
         if (!baseUrl) {
           // Send error to page
@@ -29,8 +34,8 @@ chrome.runtime.onInstalled.addListener(() => {
         const payload = {
           model: model,
           messages: [
-            { role: "system", content: "You are a summarizer assistant that briefly summarizes text." },
-            { role: "user", content: `Briefly summarize the following text in 3-5 sentences:\n\n${trimmed}` }
+            { role: "system", content: systemRoleContent },
+            { role: "user", content: `${userRoleContent}:\n\n${trimmed}` }
           ],
           temperature: 0.3,
           max_tokens: 500
