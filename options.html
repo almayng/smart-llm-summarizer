@@ -30,9 +30,50 @@
     }
     .success { background: #d4edda; color: #155724; }
     .error { background: #f8d7da; color: #721c24; }
+    .shortcut-info {
+      margin-top: 16px;
+      padding: 12px;
+      background: #f8f9fa;
+      border-radius: 5px;
+      border: 1px solid #e9ecef;
+    }
+    .shortcut-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+    .shortcut-item:last-child {
+      border-bottom: none;
+    }
+    .shortcut-key {
+      font-family: monospace;
+      background: white;
+      padding: 4px 8px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      font-weight: bold;
+      color: #4A6CF7;
+    }
+    .shortcut-link {
+      margin-top: 12px;
+      color: #4A6CF7;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .shortcut-link:hover {
+      text-decoration: underline;
+    }
+    .shortcut-description {
+      color: #666;
+      font-size: 0.9em;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
+  
   <h2>LLM Server Settings</h2>
 
   <label for="baseUrl">Base URL (e.g., http://localhost:1234/v1):</label>
@@ -51,6 +92,28 @@
 
   <label for="userRole">User Role Content (text of the page will be appended after this):</label>
   <textarea id="userRole" rows="3" placeholder="Briefly summarize the following text in 3-5 sentences" style="width: 100%; padding: 8px; margin: 6px 0; box-sizing: border-box; font-family: inherit;"></textarea>
+
+  <h2>Keyboard Shortcuts</h2>
+  <div class="shortcut-info">
+    <div class="shortcut-item">
+      <div>
+        <strong>Summarize Page</strong>
+        <div class="shortcut-description">Summarize entire page content</div>
+      </div>
+      <span class="shortcut-key" id="shortcut-page">Not set</span>
+    </div>
+    <div class="shortcut-item">
+      <div>
+        <strong>Summarize Selection</strong>
+        <div class="shortcut-description">Summarize selected text</div>
+      </div>
+      <span class="shortcut-key" id="shortcut-selection">Not set</span>
+    </div>
+    <a href="#" id="configureShortcuts" class="shortcut-link">⚙️ Configure keyboard shortcuts...</a>
+    <div class="shortcut-description">
+      Set up keyboard shortcuts by clicking the link above or going to <code>chrome://extensions/shortcuts</code>. You need to configure shortcuts manually.
+    </div>
+  </div>
 
   <button id="save">Save Settings</button>
   <div id="status"></div>

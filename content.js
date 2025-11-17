@@ -4,6 +4,10 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "getPageText") {
     sendResponse({ text: document.body.innerText || "" });
+  } else if (request.action === "getSelectedText") {
+    const selection = window.getSelection();
+    const selectedText = selection.toString().trim();
+    sendResponse({ text: selectedText || "" });
   } else if (request.action === "showSummary") {
     showSummaryPopup(request.summary);
     sendResponse({ success: true });

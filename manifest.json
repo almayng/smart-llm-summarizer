@@ -17,6 +17,15 @@
     "default_popup": "popup.html"
   },
 
+  "commands": {
+    "summarize-page": {
+      "description": "Summarize entire page"
+    },
+    "summarize-selection": {
+      "description": "Summarize selected text"
+    }
+  },
+
   "options_page": "options.html",
 
   "background": {
